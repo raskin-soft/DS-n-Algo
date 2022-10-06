@@ -9,6 +9,72 @@ namespace DS_n_Algo.All_Programs
     public class all_Programs
     {
 
+        public virtual object equalFrequency(object word = str)
+        {
+            var c = Counter(word);
+            foreach (var i in word)
+            {
+                c[i] -= 1;
+                var s = new List<object>();
+                foreach (var j in c.values())
+                {
+                    if (j)
+                    {
+                        s.append(j);
+                    }
+                }
+                if (new HashSet<object>(s).Count == 1)
+                {
+                    return true;
+                }
+                c[i] += 1;
+            }
+            return false;
+        }
+    }
+
+
+    public bool EqualFrequency(String word)
+        {
+            int[] cc = new int[27];
+            for (int i = 0; i < word.Length; i++)
+            {
+                cc[word[i] - 97]++;
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                if (cc[i] > 0)
+                {
+
+                    cc[i]--;
+                    bool eq = true;
+                    int eqf = 0;
+                    for (int j = 0; j < 26; j++)
+                    {
+                        if (cc[j] > 0)
+                        {
+                            if (eqf == 0)
+                            {
+                                eqf = cc[j];
+                            }
+                            else if (eqf != cc[j])
+                            {
+                                eq = false;
+                            }
+                        }
+                    }
+                    if (eq)
+                    {
+                        return true;
+                    }
+                    cc[i]++;
+                }
+            }
+            return false;
+        }
+
+
+
         public void RemoveDuplicateChars(string key)
         {
             string table = "";

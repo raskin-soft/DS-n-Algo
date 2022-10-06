@@ -86,9 +86,14 @@ namespace DS_n_Algo
 
             //all_prg.BinarySearchIterative();
 
-            all_prg.sortArray();
+            // all_prg.sortArray();
 
-
+            Console.WriteLine(all_prg.EqualFrequency("abc"));
+            Console.WriteLine(all_prg.EqualFrequency("abbbbcccc"));
+            Console.WriteLine(all_prg.EqualFrequency("aaabbbcccc"));
+            Console.WriteLine(all_prg.EqualFrequency("aabbcc"));
+            Console.WriteLine(all_prg.EqualFrequency("aaaabc"));
+            Console.WriteLine(all_prg.EqualFrequency("aaaabbbbcc"));
             Console.ReadLine();
         }
     }
