@@ -36,7 +36,7 @@ namespace DS_n_Algo
 
             //all_prg.IsPalindrome("civic");
 
-            //all_prg.IsUnique("asadfg");
+           //all_prg.IsUnique("asdfg");
 
             //all_prg.Replace("aaa bbb nn mmm ");
 
@@ -88,12 +88,29 @@ namespace DS_n_Algo
 
             // all_prg.sortArray();
 
-            Console.WriteLine(all_prg.EqualFrequency("abc"));
-            Console.WriteLine(all_prg.EqualFrequency("abbbbcccc"));
-            Console.WriteLine(all_prg.EqualFrequency("aaabbbcccc"));
-            Console.WriteLine(all_prg.EqualFrequency("aabbcc"));
-            Console.WriteLine(all_prg.EqualFrequency("aaaabc"));
-            Console.WriteLine(all_prg.EqualFrequency("aaaabbbbcc"));
+           // Console.WriteLine(all_prg.EqualFrequency("abbbc"));
+
+            //all_prg.RunningSum(new int[] { 1,2,3,4 });
+
+
+            //int[][] a = new int[3][];
+            //a[0] = new int[] { 1, 5 };
+            //a[1] = new int[] { 7, 3 };
+            //a[2] = new int[] { 3, 5 };
+            //Console.WriteLine(all_prg.MaximumWealth(a));
+
+            //Console.WriteLine(all_prg.FizzBuzz(5));
+
+            //Console.WriteLine(all_prg.EvenMax_OddMin(new List<int>(){ 0,2,9 }));
+
+            //Console.WriteLine(all_prg.PairCount(new List<int>() { 1,2,3,2,1 } , 5));
+
+            //Console.WriteLine(all_prg.PairCount(new List<int>() { 1,1,1 }, 2));
+
+            //Console.WriteLine(all_prg.PairCount(new List<int>() { 2,4,9,1,9,7,6,4,9 }, 8));
+
+           // Console.WriteLine(all_prg.CommonItem(new List<int>() { 1, 2, 2, 1 } , new List<int>() { 2,3,1,2 }));
+
             Console.ReadLine();
         }
     }

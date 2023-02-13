@@ -3,38 +3,150 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace DS_n_Algo.All_Programs
 {
     public class all_Programs
     {
+        // *************************************************************************************
+        // https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1#
+        // https://practice.geeksforgeeks.org/problems/count-the-triplets4615/1
+        // *************************************************************************************
 
-        public virtual object equalFrequency(object word = str)
+
+        //Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+        //Input: nums = [1,2,3,4]
+        //Output: [1,3,6,10]
+        public int[] RunningSum(int[] nums)
         {
-            var c = Counter(word);
-            foreach (var i in word)
+            int[] result = new int[nums.Length];
+            for (int i = 0; i < nums.Length; i++)
             {
-                c[i] -= 1;
-                var s = new List<object>();
-                foreach (var j in c.values())
-                {
-                    if (j)
-                    {
-                        s.append(j);
-                    }
-                }
-                if (new HashSet<object>(s).Count == 1)
-                {
-                    return true;
-                }
-                c[i] += 1;
+                if (i == 0)
+                    result[0] = nums[0];
+
+                else
+                    result[i] = result[i - 1] + nums[i];
             }
-            return false;
+            return result;
         }
-    }
 
 
-    public bool EqualFrequency(String word)
+        // Find highest sum of array sub element group
+        //Input: accounts = [[1,5],[7,3],[3,5]]
+        //Output: 10
+        //Explanation: 
+        //1st customer has wealth = 6
+        //2nd customer has wealth = 10 
+        //3rd customer has wealth = 8
+        //The 2nd customer is the richest with a wealth of 10.
+        public int MaximumWealth(int[][] accounts)
+        {
+            int MaxWealth = 0;
+
+            for (int i = 0; i < accounts.Length; i++)
+            {
+                int IndividualWealth = 0;
+                for (int j = 0; j < accounts[i].Length; j++)
+                {
+                    IndividualWealth = IndividualWealth + accounts[i][j];
+                }
+
+                MaxWealth = Math.Max(MaxWealth, IndividualWealth);
+            }
+
+            return MaxWealth;
+        }
+
+
+        // Add records in a list adding some condition
+        public IList<string> FizzBuzz(int n)
+        {
+            List<string> Records = new List<string>();
+            string data = "";
+
+            for (int i = 1; i <= n; i++)
+            {
+                if (i % 3 == 0)
+                    data = "Fizz";
+                else if (i % 5 == 0)
+                    data = "Buzz";
+                else if (i % 3 == 0 && i % 5 == 0)
+                    data = "FizzBuzz";
+                else
+                {
+                    data = i.ToString();
+                }
+                Records.Add(data);
+            }
+            return Records;
+        }
+
+
+        // Find diff of max and min of a list
+        public int EvenMax_OddMin(List<int> A)
+        {
+            int Even_Max = A.Min(x => x);
+            int Odd_Min = A.Max(x => x);
+
+            foreach (var item in A)
+            {
+                if(item%2==0)
+                {
+                    Even_Max = Math.Max(Even_Max, item);
+                }
+                else
+                {
+                    Odd_Min = Math.Min(Odd_Min, item);  
+                }
+            }
+
+            return Even_Max - Odd_Min;
+        }
+
+
+        // Pair count
+        // sum of any two elements in a list equal to a given integer
+        public int PairCount(List<int> A, int B)
+        {
+            int paircount = 0;
+
+            for(int i= 0; i<A.Count; i++)
+            {
+                for (int j = i+1; j < A.Count; j++)
+                {
+                    //Console.WriteLine(A[i] + "," + A[j]);
+                    if(A[i] + A[j] == B)
+                        paircount++;
+                }
+            }
+
+            return paircount;
+        }
+
+
+        // Common item between two list
+        public List<int> CommonItem(List<int> A, List<int> B)
+        {
+            List<int> Common = new List<int>(); 
+
+            foreach (var item in A)
+            {
+                foreach (var item2 in B)
+                {
+                    if(item.Equals(item2))
+                        Common.Add(item2);
+                }
+            }
+
+            return Common;
+        }
+
+
+        // return true if all char in a string occurs in same frequency
+        // Can take help from IsUnique(string s)
+        public bool EqualFrequency(String word)
         {
             int[] cc = new int[27];
             for (int i = 0; i < word.Length; i++)
@@ -74,7 +186,7 @@ namespace DS_n_Algo.All_Programs
         }
 
 
-
+        // Remove duplicate characters in a string
         public void RemoveDuplicateChars(string key)
         {
             string table = "";
@@ -95,6 +207,7 @@ namespace DS_n_Algo.All_Programs
         }
 
 
+        // Reverse of a string
         public string Reverse(string x)
         {
             string result = "";
@@ -103,6 +216,8 @@ namespace DS_n_Algo.All_Programs
             return result;
         }
 
+
+        // Palindrome > EYE, ABBA ....
         public void IsPalindrome(string word)
         {
             int min = 0, max = word.Length - 1;
@@ -131,6 +246,7 @@ namespace DS_n_Algo.All_Programs
         }
 
 
+        // All characters in a string occurs only once
         public void IsUnique(string s)
         {
             bool status = false;
@@ -152,6 +268,8 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(status);
         }
 
+
+        // Replace space with another chars
         public void Replace(string s)
         {
             //s = s.Trim();
@@ -160,6 +278,8 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(s);
         }
 
+
+        //
         public void SubstringAll(string s)
         {
             for (int length = 1; length < s.Length; length++)
@@ -172,6 +292,8 @@ namespace DS_n_Algo.All_Programs
             }
         }
 
+
+        //
         public void WordCount(string x)
         {
             int result = 0;
@@ -194,6 +316,8 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(result);
         }
 
+
+        //
         public void reverseArray()
         {
             List<int> arr = new List<int>();
@@ -207,6 +331,8 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(arr); ;
         }
 
+
+        //
         public void rotateLeft()
         {
             List<int> arr = new List<int>();
@@ -218,44 +344,46 @@ namespace DS_n_Algo.All_Programs
 
             List<int> rev_arr = new List<int>();
 
-            int start = 2, length = arr.Count, c=0;
+            int start = 2, length = arr.Count, c = 0;
 
             for (int i = start; i < length; i++)
             {
                 c++;
 
-                if(i == length-1)
+                if (i == length - 1)
                 {
                     rev_arr.Add(arr[i]);
 
                     length = arr.Count - c;
                     i = -1;
-                    
+
                 }
-              else
-                rev_arr.Add(arr[i]);
+                else
+                    rev_arr.Add(arr[i]);
             }
-            
+
         }
 
+
+        //
         public void MinMax()
         {
-            int[] arr = { 2,9,5,7,1 };
-            int min=0, max = 0;
+            int[] arr = { 2, 9, 5, 7, 1 };
+            int min = 0, max = 0;
 
             for (int i = 1; i < arr.Length; i++)
             {
-                if(arr[min]>arr[i])
+                if (arr[min] > arr[i])
                     min = i;
 
-                if(arr[max]<arr[i])
+                if (arr[max] < arr[i])
                     max = i;
             }
 
             int temp = 0;
 
             temp = arr[min];
-            arr[min] = arr[max];    
+            arr[min] = arr[max];
             arr[max] = temp;
 
             for (int i = 0; i < arr.Length; i++)
@@ -265,6 +393,7 @@ namespace DS_n_Algo.All_Programs
         }
 
 
+        //
         public void MergeSortedArray()
         {
             int[] front = { 1, 2, 3, 4 };
@@ -281,12 +410,15 @@ namespace DS_n_Algo.All_Programs
                 Console.WriteLine(combined[i]);
             }
         }
-            public void GetMajorityElement()
-            {
-            int[] x = { 1, 2, 4, 3, 2, 7,4,2,7,8,0,3,2,5,4,6,8,3 };
+
+
+        //
+        public void GetMajorityElement()
+        {
+            int[] x = { 1, 2, 4, 3, 2, 7, 4, 2, 7, 8, 0, 3, 2, 5, 4, 6, 8, 3 };
 
             Dictionary<int, int> d = new Dictionary<int, int>();
-                int majority = x.Length / 2;
+            int majority = x.Length / 2;
 
             //Stores the number of occcurences of each item in the passed array in a dictionary
             foreach (int i in x)
@@ -310,10 +442,10 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(maxValueKey);
 
             //Console.WriteLine("No majority element in array");
-            }
+        }
 
 
-
+        //
         public void getWeired()
         {
             int i = 010;
@@ -322,7 +454,7 @@ namespace DS_n_Algo.All_Programs
             decimal d1 = 010;
             decimal d2 = 07;
 
-            
+
 
             Console.WriteLine(i);
             Console.WriteLine(j);
@@ -332,10 +464,12 @@ namespace DS_n_Algo.All_Programs
 
         }
 
+
+        //
         public void GCD()
         {
             int a = 30, b = 75;
-            int gcd=0;
+            int gcd = 0;
 
             //for (int i = 1; i <= a && i<=b; i++)
             //{
@@ -348,6 +482,8 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine(gcd);
         }
 
+
+        //
         int gcd_recursion(int a, int b)
         {
             if (b != 0)
@@ -357,19 +493,18 @@ namespace DS_n_Algo.All_Programs
         }
 
 
-        // https://practice.geeksforgeeks.org/problems/count-the-triplets4615/1
-
+        //
         public void countTriplet()
         {
-            int n=9, c = 0;
-            int[] arr = { 2,12,10,5,5,6,7,9,1 };
+            int n = 9, c = 0;
+            int[] arr = { 2, 12, 10, 5, 5, 6, 7, 9, 1 };
             List<int> list = new List<int>();
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = i + 1; j < n; j++)
                 {
-                    list.Add(arr[i]+arr[j]);
+                    list.Add(arr[i] + arr[j]);
                 }
             }
 
@@ -383,14 +518,15 @@ namespace DS_n_Algo.All_Programs
                 }
             }
 
-            Console.WriteLine("\n\n"+c);
+            Console.WriteLine("\n\n" + c);
         }
 
 
+        //
         public void anagram()
         {
-            string a = "abqc2d", b="dcabq2";
-            int a_len=0, b_len=0;
+            string a = "abqc2d", b = "dcabq2";
+            int a_len = 0, b_len = 0;
 
             foreach (var item in a)
             {
@@ -402,13 +538,15 @@ namespace DS_n_Algo.All_Programs
                 b_len = b_len + (int)item;
             }
 
-            if(a_len==b_len)
+            if (a_len == b_len)
                 Console.WriteLine("Anagram");
             else
                 Console.WriteLine("Not Anagram");
 
         }
 
+
+        //
         public void linkedList()
         {
 
@@ -438,25 +576,7 @@ namespace DS_n_Algo.All_Programs
         }
 
 
-
-        // *************************************************************************************
-        // https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1#
-
-        public class Node
-        {
-            public int data;
-            public Node next;
-
-            public Node(int a)
-            {
-                this.data = a;
-                this.next = null;
-            }
-
-        }
-
-        Node head;
-
+        //
         public void ReverseList()
         {
             Node prev = null, current = head, next = null;
@@ -470,6 +590,8 @@ namespace DS_n_Algo.All_Programs
             head = prev;
         }
 
+
+        //
         public void AddNode(Node node)
         {
             if (head == null)
@@ -485,6 +607,8 @@ namespace DS_n_Algo.All_Programs
             }
         }
 
+
+        //
         public void PrintList()
         {
             Node current = head;
@@ -496,39 +620,74 @@ namespace DS_n_Algo.All_Programs
             Console.WriteLine();
         }
 
-        
+
+        //
+        public void sortArray()
+        {
+            // declaring and initializing the array
+            int[] arr = new int[] { 1, 9, 6, 7, 5, 9 };
+
+            // Sort array in ascending order.
+            Array.Sort(arr);
+
+            // reverse array
+            Array.Reverse(arr);
+
+            // print all element of array
+            foreach (int value in arr)
+            {
+                Console.Write(value + " ");
+            }
+        }
 
 
-        //public Node reverseList(Node head)
-        //{
-    //    Node current = head;
-    //    Node next = null;
-    //    Node prev = null;
+        //
+        public void multiDarray()
+        {
+            int[,] a = new int[5, 2] { { 0, 0 }, { 1, 2 }, { 2, 4 }, { 3, 6 }, { 4, 8 } };
+            int i, j;
 
-    //        while (current != null)
-    //        {
-    //            next = current.next;
-    //            current.next = prev;
-    //            prev = current;
-    //            current = next;
-    //        }
-    //head = prev;
-    //        return head;
-        //}
+            /* output each array element's value */
+            for (i = 0; i < 5; i++)
+            {
 
-        // *************************************************************************************
+                for (j = 0; j < 2; j++)
+                {
+                    Console.WriteLine("a[{0},{1}] = {2}", i, j, a[i, j]);
+                }
+            }
+        }
 
 
+        //
+        public Node reverseList(Node head)
+        {
+            Node current = head;
+            Node next = null;
+            Node prev = null;
 
+            while (current != null)
+            {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            head = prev;
+            return head;
+        }
+
+
+        //
         public void ParenthesisChecker()
         {
             //string str = "{)(}((]}{](}(}))})(}{{)(]{([({(]([}[(]{)){(}}{})]]]({[]]]))}[(([[{})[{[((){[]][{([]}[}][(]]){]}(}{})({{]))[}{}}({{([([(])({{{{){(((]{](})}){]{{}[{[{(]((({)([)((})]){}{))()({})[{(](]([]))(}({})){(({{(}(}{{){}[]{}{]]]([})}}}{}]){))](()]])][]}}}}{[]((}){}){]{[}](]){)]}{()({}({([[()))}[}}))){()}}[{{)}([})){[)((}([{](}}()((}({([{]({({]{}{)]]}]{[{[{{[(}({{()(]}[([]({))(){{)])]][[([][)][[{[)([}({)]][[){[(]}]}}{][}([}}]()(({})[)[]{)}{(}][[](([{)){)([}){[({])()[({[((]](})}]))]([]]]{]]))(}{))}]{}}}[{]{[]][]}{]))()}}(]}}[([((}]{}}(]}})}}({}[[]{[){](([[])}{([][})]]((([}))}[)[{){)[}){{{}]](]}}[)}{][}][{({[])}{{{{}(}[()(][][}{]{{([})){{]{}{][[{)]))((){}(][}[){)]}{([{}}{[{)}[}{][[])[)(]{]{{{{}[()({]){{)[}{][}{{])))[)))}]{[()])](](]]{{(}[((({][()}(}]]})}[){[{]{[[}[[]}{)[}{})[]{{]({}}([]}({[]}(()][[}([]]}}{}()){)[{{[][}(}{({)}])[](]{](}[]{{{}][[([}{()[}))[]}}}][{([[{}}]](){([])[)[]]])}}(()[][]}]]}}()}{[[[)]([{{(]]][[)(({]{[))](}(}]{[)]{}}}([})}()([])(({})[(((){(]({{})[[{[[[(()}{}({}){)[[([{](([{)}(}}](((}](]({}][)(}))}){]}[})[[)](]])}]}]{}}}()}()([])([}](})]]){{({}[[}){(][){]))(}(]][([{[[)}{[({[)[()][[]([({[]([{)})])((]]({(({][])]][})[])[{{(](}[}{)}][))){)(]{}[)}}))}}{[({[(}]}[[[[[){([){{(())[]]}[(](]}})(]([){][[[}}]]{}[)[([[)})[)](]{]{[((([}]]]}[[)](}{}}[}[(}(}[}]))){]){({])(]{[]](]}{(]{[(}}({}[{]{{)))()({)[]}{[[{]]]}{[)[[({(({}(}{)]}}[}}))(]}}{){[{}()[}{](]]][[]({}}{{]{(]){)[())}(({[{)])]]]({){(]}(}](]})({}((][}]{})[)}([]]]())}}[)[([{[}{(((]}(][(]][((]({{()[)}[([({]]]}){])]{]{([([)}()){)[)]{}]{}[{(]])]}]]][[}})(}})[)}[[)()](](])[}]{{)[[))((](]}})}}({})(](](]{]{({{)()}{[{([(}]}({][])[])}}[([({([}{}[]{)(}{([{[}{}}[}]]{(]({))({]]))]][}{[{}}][])([(}((())([}){{[[{]{(]))[[}{}(}}})[})(([{[{{]}((}{)(}}({{)}{})(}()}])([{(((()([()()])(]}(})]]){{[][[](({}}[{]]()}}[)(]]]]))){){[[{{()][){([{}(]}[[()(])(][}(})[](}}]}({[}([)]])(}{)[}})[{})[]({)[[{[))]][(([}([[[]([(}{)){{)]{{)}{[}[[}{}{([})}(}})}({[[(}[[}[}[(]][(}]{})](}}({((]}])()}[[](}[{(}}{([[{({})[[)][)})[(){[]}{{{){[)(([})}}[)(({()}}(){)[{{][[}][][}[}){)([[}}]]{{)]}])[]})}})]{{)}[(]()()(){][]}{}[}[)([]{[[([)(}{{(}{({}(}(}[{{](}}}}([((]))}{}(}[}}[(}((([][)([)]]}}{][[)[}})])[{{([{{(()(]()[[]{[[{[}[()))}](}]([)[]]))}([[[]))(})})]](][][}][]]][][}][)())[{{(]{{({[}{]{({[[){{([{))[([){[)})](]][{([()]))}[{[}{)}([}{{]]}})}({[(()](]{([[}])[]{([()}]}[(]]{{){({]}{]{][}[]})(]({]({[]{]({[(](}[)]}]}()[][){}{}[)]}[}[(([()((][}]]]}]{(]])[[{)([[(}[[]}(((})(})([(]{))[]])([{]{))[{})(]](])}(])}}({(]]}})([]{(]]{)(())())(()}})]}}{)[)]{(([)(()[[{](][[)([(}))[){}(}]]]}[}]{][}){}]]{{)){}{[}]([({]]]{(][}([(][[}((}[(]{}[]}({}][}[{]{[[}(){()(](([{]{)([)(((([][{}[]{)}[)})(]((]])}](({])([)[[}{]([}}([[[]{{{([({)]{)[[(}{]}}(()))]{])(({[}[{}{({(}[{[])()]](}}]{([{{}}{)}]})[)[}})){}[}}([]}}()[)()[)}[}[)(}][]}[(}[[{[}]})}}[{{{}[{})]](({[)})[([(}}][}(((]{(}(({](){])][({)}]})[[)[{[{({)]]){)}(){[([()]][}]]][]{[(]((({{}[[})]({({)}{[})[}[{({{(({]])}[])[]]{)})(})){}]{)]{}](}}]{]{][[)){[]([)}{(}][)}(()())({[[{}{)][[(]{[)({){{}]]]({}}(])(){([{(]([[(())[)}{{[}])]()]]))][{[}}])}][)[]]{{}])[[}(})}][{)){{){[]]]})](()()]](((]})]}[)}({]}{{]}{[([[{}}})[)}]]})([[]{})]{)]})))({]{({)({{]]){}){){([)]](}[{}{[[]{())({]}])([[[{](}[][]{)([]{{{({]}{]{)[)(){]])[({]}{{{[(){{])[][){]}}))({][((]]((]])([){({)()[({][[){[{}}}}({{{(]]))]{[]]([)]]((}({(([)]]}[[{()({{{({]{(){](]}])(}](]{{}{)[[}[}[(}[}[)()}}}[)){}{][(}](}}][){)(}}}[]{{}]((}}))]([][()}}{([]{}[]{[)[)(({}[}}}}{[{{{)(}](}[{([){}{))]}){](}{([]}[}]))[){]}}(([])[])}[[{{]{}[{{[{})}{}[)){({]][}{{(}{])}){{)([}{()]}((]){])][}(([(}[}}}[(}[)(]){[}([))]}[[{}([){{[)}[()[])([]{][){[(({)[)(])({}}{]{)}}][}[(]{)}[)}][]]]]])][]}{[)(}(}[][[[[[))[{]}]))}(}{}{](][{]}[[}]{{([([)){([}](}}}))({]]{))[){[[(]{])[){({}{)][)[]}((][})}(}([{})]](][)[)}){]((})[[}){}[{{]}[{(]{]}}}}){)[)()[]{{{}[){}{)}{[)}}}]}][{[{[(}}(][({]]((}]}((([[]{{]][((]{)](({)}}())]({)[)}[]((]}]]]]]]){})){([{)[{()(()[)[]{]][{[}}{[])])()[{{()[]{(()(([{][(]{(]({}[){}]]}]{[({(}[]][]{{]{[{))}{{][}{)[{]([{{))[[[)}[){[]]][(}{(){]]}{](]]}){[}](()]][[()})((}}}]){))](][{})}(}({}{}})))({}()}()]{[)}[[))[(})]}[}{([[][)(]{([{)}}[)][)]]](][}[][}[}][}[]}}(((){})][]){})[){{}[({()]{{])]]}{}{]}}([}}}(){{[()()}()())([[][]}({)({)([({{}{{(}{{()})[[{[})([])({[}[}({))[](]){[}}[()}}{[}}){(([{]}[{}(]]([)}{]([{{[}{][}({{(({[}(}}]]]{}})({}[{}}((]{](){([}{)}]((){[{[)[()){{]})])]((}}]([})[()[(]){[}}{((][(]{)[{{[][()))]{{{)]}}[())({][[]{{(])(}(}}}(({((}(){[(}[({)]}{}](][][{[[]{{]({[]()([([)[()(((]}]][}({(}}[]}(]((({}}{(]{))[{(]]))}{][[}}(]{{{]){{}[)]))[(({]}{(((]}([})}{])))(]){))(}][{)])){{[}][)(){){]])(][({]])(]{}[[]]{)[{]({)[{]{}[)[)(([}}}{}{(}](}[})[]}])}(]()][}([(}])}{]{([{[}])([({]](})(}]([}){(}}]]({]){(((({(((}])[)[()}}])}}][({{{}[][}(])}[)})[[]}}}]{}(])[][{[}}()}]}{[}[][[])))[})]{}][()[})[[)([{]{}{)}[(([)(}{[]){)[}({](]}({([]([]{{}([([{]]))]][[}){[{})}]](}(][}])[[[(][{}(]{{{}[}}){})}({])(}{[))][]{{[)())})][}))])[){][{}({)){}{)[)][{[{{{]{[)([{]{(}{([]](}[(}{]{{[[(}}[[])(({}[]{]])))]}}{(]]{}{[){]}[)())))[)()[}}{){(]]{[]{])([})(({)](]))]]]{}{()[{)([[)]}[{]{)([}{{[[}]{}{(]{[]}[((][()]]({{])(({){(})(][(]{[(}{({[])]]][](([([([}[]{{]}[(]{}({(({(}][{}([[})}(])}((]){)[])[){}}])((([]{}))(}[[[{{][}[]}))}{([)}([{](}[[[}}]](])(}})])[])}]))[}[)[]}){)[[}][})]([]((]{[][]{[}}}]()]])[)(}()}{])({[{}[{[{})](])([)]]}{[][[}))[}}}{(){{{)[(}](}(]{[)({)})))((){{{{])){[{[{[([]){])[}){{))((}{)}}{]{)])](([{[{}]({]](]])[}))[[[)}[}()(}}}(]{({[(}(]())})[[]{}(]{{]}]}({)){){[){{{{[){([{}([([]([{)](({{}[{{))(]]{][){{){}){}}]](){){{([]{])]{{][{(){][[(([]{})})){[})[}])]}}[}}(]{]){[(({[(]([{]{]({(][[())){}}](({}}()([{][){}[}))]{)]{(}}[]{]][[]}[{})[(}{(){}({}]{])](]{[)][{)])]}[}){)[()[}})}(]}{{[})])({{{([(()[]({}[}}[)}[}[[([((()][)}}})}{)(}((}[}(())({}[[()[}{]}]{[]([)}()[()([)({[{(][]]}][)[))(]]][}((][]{[{][(){([([]]}]])[)[{}[]}])}[{}[{{(])([(}[)[}{())}[{)(]){))}[)[)(}{)({){([}}{){})){)}])}{][]}](]]}})))}}(}{[}{())[{{})[{)))}[}){(}}){([}}([[({(]]}{}}{[}]}]{][(]{{)}[[{]]{}}}](){}{}}[)}[}{[]}((}[[(()(()})]([{})({]}(]{(]}[((()]{}[]}}}}[[}(}[([[(]({)[]}]}(}[([(({)(]{[}[]})()}([[[]}[)]]){{{]([{)[])({{[)([}}(][[}]{][)[[{]}[{}){(][[][{{{))}{[][({[[((]{{(})[{]])[(]}[[{[())]([]))([{()[)[}(}){[[([})[(]]})}[[}}][[](({[[[{))({{)(}(}[{}))]([{}{}{{){}}({)}}][(}}]{))((]}}{]{[]{([[](}{}(])){])({]{][}[)}{[((})(])]({{]]]})[){{(}[{]]][]]()}[[{({]])((([}]])}({[)){}}({{{(}{{[[)}}[{]}]{][}((}]]}}))){[{)](]([{(}}{[[){))](((){((]}]}}(({[]{])]{[][[{{{}}))}}}[{{]}[])(][)}}({)((}}[{([][}{[[(({{}}()])[)})]]}(()[[)[[)])(({([[)}][([()([(]{}]}}}{[]]])})[{}{}]{}({{{}{(){][}[(}]{[]){{]([({](()])({{[((()[}{}({(}{[)(()[[[]]{}}))}{){)]{{{((]{[(]]([}[[]{[}[[]{(}}}}{)({)({(){)([)(()([]}){[[[[}[]((({])][]{)[)}]({[{{][)()]{{}[[}]}((])[]]))}()]]]]((({((({](([]][(](]({{}[)(]]]{{{)(]}}}][}()][)]{]({[({[}}})()])])[[])({}([)[{}[)}{{])([[](}}](}]({[}]][{{)(}[}))}}[]}[]}](]{}){{({[)})]()}](]}{}{({[{{)))][]((}][{[{{}}][]{}[{}[](]])}(][]()][[[}]()()[}([]]()](]{}}{])){}[))[]}}){{])({([]})(][(]([{)){)[]}])(}}}[}}[(({)[{]])][)][)}{{][]){(}[])}[]}]][[))[}{{{]{([}}})((}]}({({[){}{[)[}}](){((}}}}[[){(])[[{]{[])}{}[}]}}}]()(}}{{{[)]{[{}(([)([[)({[])(]{{)}}{}[)[{}])]}){))[][}))[[]{}{({][{)](}[)}}(]]{({{)[()(}}]{(])({}{){}}{{]))((]{}()[}}}[)]))(]{(])]{({[((()))]}]{]}]]]){()[]]){[{]]]])[([][{(([)}())](}}{[}}{]()[[)(}(}[{)][(}(][]){({[}[}{)()({)]}}}(({([]}]]][)[{)((]{([{][]{})[([]{[([])[[(([{)())[([([}{{){{(){{)]((]}{{({{{{[{({(]{]}}{{[]](][([{(}){)}{)(]({((}([({}]][]}}}[)[){[[](((([]{]}]}()()](}[{}}}]{{](}])[]((){([([){())}]}[}](][)}[}))((]()])[]])](()({})}[(])][](}{{}(([][))([)(}[}((]]{[({])]{[][}){)}}}]]]}}[](()])})}([}{}}(({[})}]]}){][)[[(]}}({[}(){}[((([(}[(]{[[{[[][[[]{(][}){])}]{({({}[(]]}{)}}[}{}}}{{)}[))[)([][{)]}{(((]{][}([)])]([[[[()}}{]})][][({]]][))(]([]}](]{{[{(]}{(}[])}){()[{]}{[)}[(})(({()](()([)]))[)}]]([([[])()]}[[{}[(}][[[({[[]{]})(]]}[[[)){({[()){]([{)]{[)}}[])[{]{[[}[}}[]({[}[]}{)]]]((}})[]](()}}][][[[]{}([}][()](({))({(}{]{]()[({(])}{[(}{[{})}{}(](}){[{}{[{)]}[{{())[{[(][{(]}(})[{()())]([{]([]()}({)]}({]{{{{][]{][[(){[)])}()]{{{]))[})([}[[({]{({)]}[[[}](}][)]{(}[{)}{[[[)([[{}{){{]}()}}}[])}{{}]([(({({[[]})[}}(]}}(]{{}}[]){]{}}())[{[[]){}]]}[{}([{({][}}[[[{(){[{]{(())]([]{)}()[{}))){]]}[(][}){{){{)}))}([)]()]}][}})[])[){[{]){}]{{[)[(][)]]){{}}(}[(([}(]}{(]{}((({}}(())[]{({[){[]{([())])])}(}}())({}(]){(((][[)))[)[]][{})})){}[({}[{{(([[}((({{}}]][((({{}{){{[]}[([({}){{{{}])}()[][])))(){[]])}[]]){}}]){";
 
             string str = "(()";
-            string match = "" ;
-            int c1=0, c2=0;
+            string match = "";
+            int c1 = 0, c2 = 0;
 
-            bool b = false; 
+            bool b = false;
 
             Stack<string> stack = new Stack<string>();
 
@@ -569,7 +728,7 @@ namespace DS_n_Algo.All_Programs
                     }
                 }
             }
-            if(c1==c2)
+            if (c1 == c2)
             {
                 b = true;
             }
@@ -578,10 +737,12 @@ namespace DS_n_Algo.All_Programs
                 b = false;
             }
             Console.WriteLine(b);
-           // return b;
+            // return b;
 
         }
 
+
+        //
         public void Height_BinaryTree()
         {
             BinaryTree tree = new BinaryTree();
@@ -596,48 +757,11 @@ namespace DS_n_Algo.All_Programs
                                         tree.maxDepth(tree.root));
         }
 
-        public class NodeBT
-        {
-            public int data;
-            public NodeBT left, right;
 
-            public NodeBT(int item)
-            {
-                data = item;
-                left = right = null;
-            }
-        }
-
-        public class BinaryTree
-        {
-            public NodeBT root;
-
-            /* Compute the "maxDepth" of a tree -- the number of
-            nodes along the longest path from the root node
-            down to the farthest leaf node.*/
-            public int maxDepth(NodeBT node)
-            {
-                if (node == null)
-                    return 0;
-                else
-                {
-                    /* compute the depth of each subtree */
-                    int lDepth = maxDepth(node.left);
-                    int rDepth = maxDepth(node.right);
-
-                    /* use the larger one */
-                    if (lDepth > rDepth)
-                        return (lDepth + 1);
-                    else
-                        return (rDepth + 1);
-                }
-            }
-        }
-
-
+        //
         public void BinarySearchIterative()
         {
-            int[] n = { 17,18,19,20,21 };
+            int[] n = { 17, 18, 19, 20, 21 };
             int k = 19;
 
             int min = 0;
@@ -688,41 +812,60 @@ namespace DS_n_Algo.All_Programs
         //}
 
 
-        public void sortArray()
+     #region All Relevant Classes
+
+        Node head;
+        public class Node
         {
-            // declaring and initializing the array
-            int[] arr = new int[] { 1, 9, 6, 7, 5, 9 };
+            public int data;
+            public Node next;
 
-            // Sort array in ascending order.
-            Array.Sort(arr);
-
-            // reverse array
-            Array.Reverse(arr);
-
-            // print all element of array
-            foreach (int value in arr)
+            public Node(int a)
             {
-                Console.Write(value + " ");
+                this.data = a;
+                this.next = null;
             }
+
         }
 
-
-        public void multiDarray()
+        public class BinaryTree
         {
-            int[,] a = new int[5, 2] { { 0, 0 }, { 1, 2 }, { 2, 4 }, { 3, 6 }, { 4, 8 } };
-            int i, j;
+            public NodeBT root;
 
-            /* output each array element's value */
-            for (i = 0; i < 5; i++)
+            /* Compute the "maxDepth" of a tree -- the number of
+            nodes along the longest path from the root node
+            down to the farthest leaf node.*/
+            public int maxDepth(NodeBT node)
             {
-
-                for (j = 0; j < 2; j++)
+                if (node == null)
+                    return 0;
+                else
                 {
-                    Console.WriteLine("a[{0},{1}] = {2}", i, j, a[i, j]);
+                    /* compute the depth of each subtree */
+                    int lDepth = maxDepth(node.left);
+                    int rDepth = maxDepth(node.right);
+
+                    /* use the larger one */
+                    if (lDepth > rDepth)
+                        return (lDepth + 1);
+                    else
+                        return (rDepth + 1);
                 }
             }
         }
 
+        public class NodeBT
+        {
+            public int data;
+            public NodeBT left, right;
+
+            public NodeBT(int item)
+            {
+                data = item;
+                left = right = null;
+            }
+        }
+     #endregion
 
 
 
@@ -736,5 +879,5 @@ namespace DS_n_Algo.All_Programs
 
 
 
-}
+    }
 }
